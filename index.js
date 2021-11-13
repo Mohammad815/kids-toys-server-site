@@ -16,7 +16,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run(){
     try{
         await client.connect();
-        console.log('database connected  successfuflly for relax')
+        console.log('database connected  successfuflly now i am feel relax')
         
       const database = client.db('baby_toys');
       const productsCollection = database.collection('products');
@@ -37,7 +37,7 @@ async function run(){
        });
         // single Product
         app.get("/singleProduct/:id", async (req, res) => {
-            console.log(req.params.id);
+          
             const result = await productsCollection
             .find({ _id: ObjectId(req.params.id) })
             .toArray();
@@ -47,7 +47,7 @@ async function run(){
          //delete Product
        app.delete("/deleteProduct/:id",async(req,res)=>{
           
-        console.log(req.params.id)
+       
 
         const result = await productsCollection.deleteOne({_id:ObjectId(req.params.id),})
         // console.log(result);
@@ -68,7 +68,7 @@ async function run(){
             //delete Product
        app.delete("/deleteOrder/:id",async(req,res)=>{
           
-        console.log(req.params.id)
+        
 
         const result = await ordersCollection.deleteOne({_id:ObjectId(req.params.id),})
         // console.log(result);
@@ -88,7 +88,7 @@ async function run(){
              // review
               app.post("/addReview", async (req, res) => {
                 const result = await reviewCollection.insertOne(req.body);
-                console.log(result)
+              
                 res.send(result);
               });
                  /// all review
@@ -102,7 +102,7 @@ async function run(){
         app.post('/users', async (req, res) => {
             const user = req.body;
             const result = await usersCollection.insertOne(user);
-            console.log(result);
+           
             res.json(result);
         });
         // google sign in upsert in user
@@ -119,7 +119,7 @@ async function run(){
         // user make admin
         app.put('/users/admin', async (req, res) => {
           const user = req.body;
-          console.log('put',user)
+         
           const filter = { email: user.email };
           const updateDoc = { $set: {role:'admin'} };
           const result = await usersCollection.updateOne(filter, updateDoc);
